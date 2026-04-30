@@ -1,6 +1,5 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": ".",
-    "framework": "static",
-    "public": true
+    "installCommand": "echo \"Skipping install step\"",
+    "buildCommand": "echo \"Skipping build step\"",
+    "outputDirectory": "."
 }

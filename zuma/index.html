@@ -1,43 +1,67 @@
-<div class="shadow"></div>
-<div class="github">
-    <a href="https://github.com/lin-ting-yu/Zuma" target="blank">&lt;&gt;</a>
-</div>
-<div id="score" class="score">
-    <div class="title">SCORE</div>
-    <div class="num">0</div>
-</div>
-<div class="popup-container">
-    <div id="start" class="popup active">
-        <div class="title">HELLO !</div>
-        <div class="info">
-            <ul>
-                <li>LEFT CLICK TO SHOOT MARBLE</li>
-                <li>PRESS "SPACE" TO SWITCH THE MARBLE COLOR</li>
-                <li>PRESS "ESC" TO STOP</li>
-            </ul>
-        </div>
-        <div class="button-container">
-            <div class="button">START</div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zuma Clone</title>
+
+    <!-- Link the Google Font used in your CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 1. Link your compiled CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 2. Your original HTML goes here -->
+    <div class="shadow"></div>
+    <div class="github">
+        <a href="https://github.com/lin-ting-yu/Zuma" target="blank">&lt;&gt;</a>
     </div>
-    <div id="stop" class="popup">
-        <div class="title">HELLO !</div>
-        <div class="info">
-            YOOOOU JUSSSSSST NEED A BRRRRRRREAK !
-        </div>
-        <div class="button-container">
-            <div id="start-btn" class="button">START</div>
-            <div id="reset-btn" class="button button-2">RESTART</div>
-        </div>
+    <div id="score" class="score">
+        <div class="title">SCORE</div>
+        <div class="num">0</div>
     </div>
-    <div id="final" class="popup">
-        <div class="title">HELLO !</div>
-        <div class="info">
-            YOU GOT <span class="num"></span> SCORES !
+    <div class="popup-container">
+        <div id="start" class="popup active">
+            <div class="title">HELLO !</div>
+            <div class="info">
+                <ul>
+                    <li>LEFT CLICK TO SHOOT MARBLE</li>
+                    <li>PRESS "SPACE" TO SWITCH THE MARBLE COLOR</li>
+                    <li>PRESS "ESC" TO STOP</li>
+                </ul>
+            </div>
+            <div class="button-container">
+                <div class="button">START</div>
+            </div>
         </div>
-        <div class="button-container">
-            <div class="button">RESTART</div>
+        <div id="stop" class="popup">
+            <div class="title">HELLO !</div>
+            <div class="info">
+                YOOOOU JUSSSSSST NEED A BRRRRRRREAK !
+            </div>
+            <div class="button-container">
+                <div id="start-btn" class="button">START</div>
+                <div id="reset-btn" class="button button-2">RESTART</div>
+            </div>
         </div>
+        <div id="final" class="popup">
+            <div class="title">HELLO !</div>
+            <div class="info">
+                YOU GOT <span class="num"></span> SCORES !
+            </div>
+            <div class="button-container">
+                <div class="button">RESTART</div>
+            </div>
+        </div>
+        <div class="mask"></div>
     </div>
-    <div class="mask"></div>
-</div>
+
+    <!-- 3. Link your compiled JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
