@@ -1,11 +1,5 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": ".",
-    "public": true,
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+    "installCommand": "echo \"Skipping install step\"",
+    "buildCommand": "echo \"Skipping build step\"",
+    "outputDirectory": "."
 }
