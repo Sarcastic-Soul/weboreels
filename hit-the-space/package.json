@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "JS13k 2021 Entry",
     "main": "index.html",
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
         "dev": "npx http-server . -p 3000",
         "build": "echo 'Build from build-script'",
