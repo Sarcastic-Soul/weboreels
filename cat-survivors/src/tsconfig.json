@@ -2,12 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "node",
     "types": ["vite/client"],
     "isolatedModules": true,
     "useDefineForClassFields": false,
     "resolveJsonModule": true,
-    "preserveValueImports": false,
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true,

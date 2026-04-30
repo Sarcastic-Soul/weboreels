@@ -9,11 +9,11 @@ export const rollupTypeScriptPlugin = (input: string) =>
     transformers: (program) => {
       return {
         before: [
-          tsInlineConstEnums(program),
-          tsOptimizeConstEnums(program),
-          propertiesRenameTransformer(program, {
-            entrySourceFiles: [input],
-          }),
+          // tsInlineConstEnums(program),
+          // tsOptimizeConstEnums(program),
+          // propertiesRenameTransformer(program, {
+          //   entrySourceFiles: [input],
+          // }),
         ],
         after: [],
         afterDeclarations: [
