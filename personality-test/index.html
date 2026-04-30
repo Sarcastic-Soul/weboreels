@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Discover Your MBTI ✨</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Nunito:wght@400;600;700&display=swap');
+
+  :root {
+    --grad1: #f953c6;
+    --grad2: #b91d73;
+    --card-bg: rgba(255,255,255,0.12);
+    --text: #fff;
+    --shadow: 0 8px 32px rgba(0,0,0,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
+    background-size: 400% 400%;
+    animation: bgShift 8s ease infinite;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  @keyframes bgShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating blobs */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+    pointer-events: none;
+    animation: floatBlob 12s ease-in-out infinite;
+    z-index: 0;
+  }
+  .blob1 { width:400px; height:400px; background:#f953c6; top:-100px; left:-100px; animation-delay:0s; }
+  .blob2 { width:350px; height:350px; background:#43e97b; bottom:-80px; right:-80px; animation-delay:-4s; }
+  .blob3 { width:250px; height:250px; background:#4facfe; top:40%; left:60%; animation-delay:-8s; }
+
+  @keyframes floatBlob {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-30px) scale(1.05); }
+    66% { transform: translate(-20px,20px) scale(0.95); }
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 680px;
+  }
+
+  /* ── INTRO ── */
+  #intro {
+    text-align: center;
+    animation: fadeUp 0.7s ease;
+  }
+
+  .logo-emoji { font-size: 4rem; display:block; margin-bottom:10px; animation: spinBounce 2s ease infinite; }
+
+  @keyframes spinBounce {
+    0%,100% { transform: rotate(-10deg) scale(1); }
+    50%  { transform: rotate(10deg) scale(1.1); }
+  }
+
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #f953c6, #43e97b, #4facfe, #f953c6);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .meta-pills {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-start {
+    display: inline-block;
+    padding: 16px 48px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f953c6, #4facfe);
+    color: #fff;
+    box-shadow: 0 6px 30px rgba(249,83,198,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-start:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 40px rgba(249,83,198,0.65); }
+  .btn-start:active { transform: scale(0.97); }
+
+  /* ── QUIZ ── */
+  #quiz { display:none; }
+
+  .progress-wrap {
+    margin-bottom: 24px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.75;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar-track {
+    height: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f953c6, #43e97b);
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .question-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 24px;
+    padding: 36px 32px 28px;
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.5s ease;
+    margin-bottom: 20px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .q-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  .q-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 28px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .opt-btn {
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    padding: 14px 20px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .opt-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.45);
+    transform: translateX(6px);
+  }
+
+  .opt-btn.selected {
+    background: linear-gradient(135deg, rgba(249,83,198,0.4), rgba(79,172,254,0.4));
+    border-color: #f953c6;
+    transform: translateX(6px);
+    box-shadow: 0 4px 20px rgba(249,83,198,0.3);
+  }
+
+  .opt-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .btn-nav {
+    padding: 11px 28px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+  }
+  .btn-nav:hover:not(:disabled) { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.55); }
+  .btn-nav:disabled { opacity:0.3; cursor:not-allowed; }
+
+  .btn-next {
+    background: linear-gradient(135deg, #f953c6, #4facfe);
+    border: none;
+    box-shadow: 0 4px 20px rgba(249,83,198,0.4);
+  }
+  .btn-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(249,83,198,0.55); }
+
+  /* ── RESULT ── */
+  #result { display:none; text-align:center; animation: fadeUp 0.7s ease; }
+
+  .result-badge {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: popIn 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0); opacity:0; }
+    to   { transform: scale(1); opacity:1; }
+  }
+
+  .result-type {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    background: linear-gradient(90deg, #f953c6, #43e97b, #4facfe);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+    margin-bottom: 8px;
+  }
+
+  .result-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    opacity: 0.9;
+  }
+
+  .result-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 24px;
+    padding: 28px 28px;
+    backdrop-filter: blur(16px);
+    text-align: left;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+  }
+
+  .result-desc {
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.9;
+    margin-bottom: 20px;
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .trait-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spectrum-row {
+    margin-bottom: 10px;
+  }
+
+  .spectrum-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 700;
+    opacity: 0.7;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .spectrum-track {
+    height: 10px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .spectrum-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 1s ease 0.3s;
+  }
+
+  .famous-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .famous-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 10px;
+  }
+
+  .btn-retake {
+    display: inline-block;
+    padding: 14px 42px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    color: #1a1a2e;
+    box-shadow: 0 6px 30px rgba(67,233,123,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+  }
+  .btn-retake:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(67,233,123,0.55); }
+
+  .confetti-wrap {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; z-index:999; overflow:hidden;
+  }
+
+  .c-dot {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    animation: confettiFall linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity:1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+<div class="confetti-wrap" id="confetti"></div>
+
+<div class="wrapper">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <span class="logo-emoji">🧠</span>
+    <h1>What's Your Personality Type?</h1>
+    <p class="subtitle">Answer 20 quick questions and we'll reveal<br>your MBTI type from all 16 possibilities!</p>
+    <div class="meta-pills">
+      <span class="pill">⏱️ ~3 mins</span>
+      <span class="pill">🎯 20 questions</span>
+      <span class="pill">🔮 16 possible types</span>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">Let's Go! ✨</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="q-counter">Question 1 of 20</span>
+        <span id="q-pct">0%</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="q-card">
+      <div class="q-category" id="q-cat"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-nav btn-next" id="btn-next" onclick="goNext()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result">
+    <span class="result-badge" id="res-emoji"></span>
+    <div class="result-type" id="res-type"></div>
+    <div class="result-name" id="res-name"></div>
+    <div class="result-card">
+      <p class="result-desc" id="res-desc"></p>
+
+      <div class="section-label">Your Spectrum</div>
+      <div id="spectrum-wrap" style="margin-bottom:20px;"></div>
+
+      <div class="section-label">Key Traits</div>
+      <div class="traits-grid" id="traits-wrap"></div>
+
+      <div class="section-label">Famous <span id="res-type-small"></span>s</div>
+      <div class="famous-list" id="famous-wrap"></div>
+    </div>
+    <button class="btn-retake" onclick="retake()">🔄 Take it again</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  // E/I
+  { dim:'EI', cat:'🌍 Social Energy', text:'At a party, you tend to…', opts:[{t:'Work the room and chat with everyone', v:'E'},{t:'Stick with a few close people you know', v:'I'}] },
+  { dim:'EI', cat:'🌍 Social Energy', text:'After a long week, your ideal recharge is…', opts:[{t:'Going out with friends or to an event', v:'E'},{t:'Staying in and having quiet time alone', v:'I'}] },
+  { dim:'EI', cat:'🌍 Social Energy', text:'When you have a problem, you usually…', opts:[{t:'Talk it through with people around you', v:'E'},{t:'Think it over privately before sharing', v:'I'}] },
+  { dim:'EI', cat:'🌍 Social Energy', text:'You feel most energised when…', opts:[{t:'You\'re around lots of different people', v:'E'},{t:'You have time to yourself to reflect', v:'I'}] },
+  { dim:'EI', cat:'🌍 Social Energy', text:'In group projects you typically…', opts:[{t:'Jump into discussions and drive conversation', v:'E'},{t:'Prefer to contribute ideas after thinking them through', v:'I'}] },
+
+  // S/N
+  { dim:'SN', cat:'🔭 How You See The World', text:'You\'re more interested in…', opts:[{t:'What is real and concrete, here and now', v:'S'},{t:'What could be — possibilities and the future', v:'N'}] },
+  { dim:'SN', cat:'🔭 How You See The World', text:'You trust information more when it…', opts:[{t:'Comes from direct experience and facts', v:'S'},{t:'Fits into a broader pattern or theory', v:'N'}] },
+  { dim:'SN', cat:'🔭 How You See The World', text:'When reading instructions, you…', opts:[{t:'Follow them step by step as written', v:'S'},{t:'Skim for the big picture and improvise', v:'N'}] },
+  { dim:'SN', cat:'🔭 How You See The World', text:'You\'d rather work on a problem that…', opts:[{t:'Has a proven, practical solution', v:'S'},{t:'Is new, abstract, and open-ended', v:'N'}] },
+  { dim:'SN', cat:'🔭 How You See The World', text:'People would describe you as…', opts:[{t:'Practical and grounded', v:'S'},{t:'Imaginative and visionary', v:'N'}] },
+
+  // T/F
+  { dim:'TF', cat:'❤️ Decisions & Values', text:'When making a tough decision, you rely more on…', opts:[{t:'Logic, data, and objective analysis', v:'T'},{t:'Your gut feeling and how it affects people', v:'F'}] },
+  { dim:'TF', cat:'❤️ Decisions & Values', text:'A friend asks for your honest opinion on their work. You…', opts:[{t:'Give a frank critique — honesty helps them improve', v:'T'},{t:'Find encouraging things to say while gently noting issues', v:'F'}] },
+  { dim:'TF', cat:'❤️ Decisions & Values', text:'In a debate, what matters most to you?', opts:[{t:'Being logically consistent and accurate', v:'T'},{t:'Ensuring everyone feels heard and respected', v:'F'}] },
+  { dim:'TF', cat:'❤️ Decisions & Values', text:'You tend to notice…', opts:[{t:'Flaws in reasoning and inconsistencies', v:'T'},{t:'People\'s moods and emotional undercurrents', v:'F'}] },
+  { dim:'TF', cat:'❤️ Decisions & Values', text:'A rule is unfair to someone. You think…', opts:[{t:'Rules exist for a reason; exceptions cause chaos', v:'T'},{t:'Compassion should come first — bend the rule', v:'F'}] },
+
+  // J/P
+  { dim:'JP', cat:'📅 Your Lifestyle', text:'Your ideal weekend is…', opts:[{t:'Planned out in advance — you know what to expect', v:'J'},{t:'Totally spontaneous — see what comes up!', v:'P'}] },
+  { dim:'JP', cat:'📅 Your Lifestyle', text:'Your workspace / bedroom is usually…', opts:[{t:'Tidy, organised, everything in its place', v:'J'},{t:'Organised chaos — you know where everything is (sort of)', v:'P'}] },
+  { dim:'JP', cat:'📅 Your Lifestyle', text:'Deadlines make you feel…', opts:[{t:'Grounded — they help you plan your work', v:'J'},{t:'Pressured — you prefer to keep options open', v:'P'}] },
+  { dim:'JP', cat:'📅 Your Lifestyle', text:'You prefer to…', opts:[{t:'Make decisions quickly and move forward', v:'J'},{t:'Keep your options open as long as possible', v:'P'}] },
+  { dim:'JP', cat:'📅 Your Lifestyle', text:'When a plan changes unexpectedly, you…', opts:[{t:'Feel a bit thrown off — you liked the original plan', v:'J'},{t:'Adapt easily — flexibility is fine by you', v:'P'}] },
+];
+
+const types = {
+  INTJ:{ name:'The Architect',      emoji:'🏛️',  desc:'Strategic, independent, and driven by high standards. INTJs are rare visionaries who combine analytical thinking with relentless ambition. They see the world as a chessboard and are always several moves ahead.', traits:['Strategic thinker','Decisive','High standards','Independent'], famous:['Elon Musk','Nikola Tesla','Friedrich Nietzsche','Michelle Obama'] },
+  INTP:{ name:'The Logician',       emoji:'🧪',  desc:'Curious, inventive, and endlessly fascinated by ideas. INTPs love exploring theories and finding logical patterns in everything. They\'re the quiet genius who surprises everyone with a groundbreaking insight.', traits:['Analytical','Creative','Objective','Thoughtful'], famous:['Albert Einstein','Bill Gates','Charles Darwin','Tina Fey'] },
+  ENTJ:{ name:'The Commander',      emoji:'⚡',  desc:'Bold, strategic, and natural-born leaders. ENTJs love challenges and will bulldoze through obstacles with sheer willpower and clever planning. They don\'t wait for the future — they build it.', traits:['Natural leader','Charismatic','Efficient','Bold'], famous:['Steve Jobs','Napoleon','Franklin D. Roosevelt','Gordon Ramsay'] },
+  ENTP:{ name:'The Debater',        emoji:'🔥',  desc:'Quick-witted, inventive, and always up for a debate. ENTPs love to challenge ideas just to see where they go. They\'re the idea generator who thrives on turning concepts upside down.', traits:['Innovative','Quick-witted','Loves debate','Energetic'], famous:['Mark Twain','Tom Hanks','Celine Dion','Sacha Baron Cohen'] },
+  INFJ:{ name:'The Advocate',       emoji:'🌿',  desc:'Insightful, principled, and deeply empathetic. INFJs are rare idealists who see the big picture and quietly work toward making the world a better place, one meaningful connection at a time.', traits:['Empathetic','Visionary','Principled','Private'], famous:['Martin Luther King Jr.','Lady Gaga','Plato','Nelson Mandela'] },
+  INFP:{ name:'The Mediator',       emoji:'🌸',  desc:'Poetic, kind, and driven by deep values. INFPs see the world through a lens of possibility and are fiercely passionate about authenticity. They feel everything deeply and channel it into creativity.', traits:['Idealistic','Creative','Empathetic','Passionate'], famous:['William Shakespeare','J.R.R. Tolkien','Princess Diana','Frédéric Chopin'] },
+  ENFJ:{ name:'The Protagonist',    emoji:'🌟',  desc:'Warm, charismatic, and natural leaders of people. ENFJs are born to inspire and guide those around them. They radiate warmth and have an almost magical ability to help people become their best selves.', traits:['Charismatic','Empathetic','Natural leader','Inspiring'], famous:['Barack Obama','Oprah Winfrey','Maya Angelou','Malala Yousafzai'] },
+  ENFP:{ name:'The Campaigner',     emoji:'🎨',  desc:'Enthusiastic, creative, and seeing life as a grand adventure. ENFPs are free spirits with boundless energy and a deep love of people and ideas. Every day is full of exciting possibilities!', traits:['Enthusiastic','Creative','Sociable','Spontaneous'], famous:['Robin Williams','Walt Disney','Che Guevara','Jennifer Aniston'] },
+  ISTJ:{ name:'The Logistician',    emoji:'📋',  desc:'Responsible, reliable, and thorough in everything they do. ISTJs are the backbone of any organisation — dependable, methodical, and always delivering on their word. Tradition and loyalty matter deeply.', traits:['Reliable','Organised','Detail-oriented','Loyal'], famous:['George Washington','Queen Elizabeth II','Warren Buffett','Jeff Bezos'] },
+  ISFJ:{ name:'The Defender',       emoji:'🛡️',  desc:'Warm, dedicated, and always ready to protect those they care about. ISFJs are quiet heroes who work tirelessly behind the scenes, driven by a deep sense of duty and a huge heart.', traits:['Caring','Reliable','Patient','Detail-oriented'], famous:['Mother Teresa','Beyoncé','Rosa Parks','Kate Middleton'] },
+  ESTJ:{ name:'The Executive',      emoji:'💼',  desc:'Organised, assertive, and driven to lead by example. ESTJs believe in order and efficiency and are exceptional at rallying people toward a common goal. They get things done — period.', traits:['Organised','Decisive','Hardworking','Traditional'], famous:['Hillary Clinton','Henry Ford','Michelle Obama','Frank Sinatra'] },
+  ESFJ:{ name:'The Consul',         emoji:'🤝',  desc:'Caring, social, and deeply invested in the people around them. ESFJs are natural community-builders who love bringing people together and making sure everyone feels included, valued, and happy.', traits:['Warm','Loyal','Social','Organised'], famous:['Taylor Swift','Ed Sheeran','Bill Clinton','Elton John'] },
+  ISTP:{ name:'The Virtuoso',       emoji:'🔧',  desc:'Bold, practical, and always ready to dive in and figure things out. ISTPs are master troubleshooters — hands-on explorers who understand how things work and aren\'t afraid to take risks.', traits:['Observant','Practical','Spontaneous','Analytical'], famous:['Clint Eastwood','Scarlett Johansson','Bruce Lee','Olivia Wilde'] },
+  ISFP:{ name:'The Adventurer',     emoji:'🎭',  desc:'Gentle, sensitive, and quietly passionate. ISFPs are true artists at heart — they experience the world through their senses and express themselves in deeply personal, creative ways that surprise and delight.', traits:['Artistic','Gentle','Curious','Spontaneous'], famous:['Michael Jackson','Frida Kahlo','Bob Dylan','Britney Spears'] },
+  ESTP:{ name:'The Entrepreneur',   emoji:'🚀',  desc:'Energetic, perceptive, and living life at full throttle. ESTPs thrive in the moment and are natural risk-takers who can read any room in seconds. They make things happen, fast.', traits:['Bold','Energetic','Action-oriented','Perceptive'], famous:['Donald Trump','Madonna','Ernest Hemingway','Evel Knievel'] },
+  ESFP:{ name:'The Entertainer',    emoji:'🎉',  desc:'Spontaneous, energetic, and making every moment a celebration. ESFPs are the life of every party — irresistibly fun, deeply caring, and gifted at bringing joy to the people around them.', traits:['Fun-loving','Spontaneous','Generous','Sociable'], famous:['Marilyn Monroe','Elvis Presley','Adele','Miley Cyrus'] },
+};
+
+const dimColors = {
+  EI: ['#f953c6','#4facfe'],
+  SN: ['#43e97b','#fa8231'],
+  TF: ['#4facfe','#fd7272'],
+  JP: ['#fa8231','#a29bfe'],
+};
+
+let answers = {};
+let cur = 0;
+
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('q-counter').textContent = `Question ${cur+1} of ${questions.length}`;
+  const pct = Math.round((cur / questions.length) * 100);
+  document.getElementById('q-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('q-text').textContent = q.text;
+
+  const icons = ['🅰️','🅱️'];
+  const optWrap = document.getElementById('q-options');
+  optWrap.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn' + (answers[cur] === o.v ? ' selected' : '');
+    btn.innerHTML = `<span class="opt-icon">${icons[i]}</span>${o.t}`;
+    btn.onclick = () => selectOpt(o.v, q.opts);
+    optWrap.appendChild(btn);
+  });
+
+  document.getElementById('btn-back').disabled = cur === 0;
+  document.getElementById('btn-next').disabled = answers[cur] === undefined;
+  document.getElementById('btn-next').textContent = cur === questions.length - 1 ? 'See My Result 🎉' : 'Next →';
+
+  // re-animate card
+  const card = document.getElementById('q-card');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp 0.45s ease';
+}
+
+function selectOpt(val) {
+  answers[cur] = val;
+  document.querySelectorAll('.opt-btn').forEach((b,i) => {
+    b.classList.toggle('selected', questions[cur].opts[i].v === val);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  if (answers[cur] === undefined) return;
+  if (cur === questions.length - 1) { showResult(); return; }
+  cur++;
+  renderQ();
+}
+
+function goBack() {
+  if (cur === 0) return;
+  cur--;
+  renderQ();
+}
+
+function calcType() {
+  const scores = { E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0 };
+  questions.forEach((q,i) => { if (answers[i]) scores[answers[i]]++; });
+  return (scores.E>=scores.I?'E':'I') + (scores.S>=scores.N?'S':'N') + (scores.T>=scores.F?'T':'F') + (scores.J>=scores.P?'J':'P');
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const prog = document.getElementById('prog-fill');
+  prog.style.width = '100%';
+
+  const type = calcType();
+  const info = types[type];
+
+  document.getElementById('res-emoji').textContent = info.emoji;
+  document.getElementById('res-type').textContent = type;
+  document.getElementById('res-name').textContent = info.name;
+  document.getElementById('res-desc').textContent = info.desc;
+  document.getElementById('res-type-small').textContent = type;
+
+  // spectrum
+  const scores = { E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0 };
+  questions.forEach((q,i) => { if (answers[i]) scores[answers[i]]++; });
+
+  const dims = [['E','I'],['S','N'],['T','F'],['J','P']];
+  const specWrap = document.getElementById('spectrum-wrap');
+  specWrap.innerHTML = '';
+  dims.forEach(([a,b]) => {
+    const key = a+b;
+    const total = scores[a]+scores[b];
+    const pct = total ? Math.round((scores[a]/total)*100) : 50;
+    const colors = dimColors[key];
+    const row = document.createElement('div');
+    row.className = 'spectrum-row';
+    row.innerHTML = `
+      <div class="spectrum-label"><span>${a} (${scores[a]})</span><span>${b} (${scores[b]})</span></div>
+      <div class="spectrum-track"><div class="spectrum-fill" style="width:${pct}%;background:linear-gradient(90deg,${colors[0]},${colors[1]})"></div></div>`;
+    specWrap.appendChild(row);
+  });
+
+  // traits
+  const traitsWrap = document.getElementById('traits-wrap');
+  traitsWrap.innerHTML = '';
+  const tEmojis = ['✨','🎯','💡','🔑'];
+  info.traits.forEach((t,i) => {
+    const el = document.createElement('div');
+    el.className = 'trait-pill';
+    el.innerHTML = `${tEmojis[i]} ${t}`;
+    traitsWrap.appendChild(el);
+  });
+
+  // famous
+  const famWrap = document.getElementById('famous-wrap');
+  famWrap.innerHTML = '';
+  info.famous.forEach(f => {
+    const el = document.createElement('span');
+    el.className = 'famous-pill';
+    el.textContent = f;
+    famWrap.appendChild(el);
+  });
+
+  launchConfetti();
+}
+
+function retake() {
+  answers = {};
+  cur = 0;
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('intro').style.display = 'block';
+  document.getElementById('prog-fill').style.width = '0%';
+}
+
+function launchConfetti() {
+  const wrap = document.getElementById('confetti');
+  wrap.innerHTML = '';
+  const colors = ['#f953c6','#43e97b','#4facfe','#fa8231','#a29bfe','#fd7272','#ffd32a'];
+  for (let i=0; i<80; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'c-dot';
+    dot.style.cssText = `
+      left:${Math.random()*100}vw;
+      top:-20px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*10}px;
+      height:${6+Math.random()*10}px;
+      border-radius:${Math.random()>0.5?'50%':'3px'};
+      animation-duration:${2+Math.random()*3}s;
+      animation-delay:${Math.random()*1.5}s;
+    `;
+    wrap.appendChild(dot);
+  }
+  setTimeout(() => { wrap.innerHTML = ''; }, 5000);
+}
+</script>
+</body>
+</html>

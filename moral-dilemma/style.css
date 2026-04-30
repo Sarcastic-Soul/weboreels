@@ -1,0 +1,188 @@
+/* Import a fun, rounded font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap");
+
+:root {
+    /* Fun, optimistic sky gradient */
+    --bg-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+
+    /* Card aesthetics */
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+
+    /* Typography colors */
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent-color: #6c5ce7;
+
+    /* Button colors - 3D effect */
+    --btn-border: #fd79a8;
+    --btn-shadow: #e84393;
+    --btn-primary: #fd79a8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Using the fun fonts we imported */
+    font-family: "Nunito", sans-serif;
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--card-bg);
+    max-width: 650px;
+    width: 100%;
+    padding: 50px 40px;
+    border-radius: 30px; /* Extra rounded for a friendly look */
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.5);
+
+    /* Pop-in animation on load */
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+header {
+    margin-bottom: 35px;
+}
+
+header h1 {
+    font-family: "Fredoka", sans-serif;
+    color: var(--accent-color);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px rgba(108, 92, 231, 0.1);
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#progress-bar {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    background-color: #dfe6e9;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+#question-text {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    color: var(--text-main);
+}
+
+#choices-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Chunky 3D Buttons */
+.btn {
+    background-color: white;
+    color: var(--btn-primary);
+    border: 3px solid var(--btn-primary);
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    border-radius: 15px;
+    cursor: pointer;
+
+    /* The 3D bouncy transition */
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 6px 0 var(--btn-shadow);
+    transform: translateY(0);
+}
+
+.btn:hover {
+    background-color: var(--btn-primary);
+    color: white;
+    transform: translateY(-4px); /* Moves up on hover */
+    box-shadow: 0 10px 0 var(--btn-shadow);
+}
+
+.btn:active {
+    transform: translateY(4px); /* Presses down completely on click */
+    box-shadow: 0 2px 0 var(--btn-shadow);
+}
+
+.primary-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 0 #4a3f9e;
+    margin-top: 30px;
+    font-size: 1.3rem;
+    padding: 15px 40px;
+}
+
+.primary-btn:hover {
+    background-color: #5b4bc4;
+    border-color: #5b4bc4;
+    box-shadow: 0 10px 0 #4a3f9e;
+}
+
+.primary-btn:active {
+    box-shadow: 0 2px 0 #4a3f9e;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Results Section Tweaks */
+#result-container h2 {
+    font-family: "Fredoka", sans-serif;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#result-title {
+    font-family: "Fredoka", sans-serif;
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#result-desc {
+    line-height: 1.7;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    margin-bottom: 35px;
+    padding: 0 20px;
+}
