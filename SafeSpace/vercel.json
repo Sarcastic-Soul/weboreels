@@ -1,0 +1,6 @@
+{
+    "buildCommand": "npm run prod",
+    "outputDirectory": "dist",
+    "framework": "static",
+    "public": true
+}

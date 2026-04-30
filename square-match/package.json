@@ -1,0 +1,21 @@
+{
+    "name": "square-match",
+    "version": "1.0.0",
+    "description": "A match-three style puzzle game",
+    "main": "script.js",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Static site - no build required'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "puzzle",
+        "match-three"
+    ],
+    "author": "Fernando Cohen",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

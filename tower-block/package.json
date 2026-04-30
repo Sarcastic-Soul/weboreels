@@ -1,0 +1,23 @@
+{
+    "name": "tower-block",
+    "version": "1.0.0",
+    "description": "A tower building game",
+    "main": "index.html",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "npm run compile-sass",
+        "compile-sass": "node-sass style.scss > style.css",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "tower",
+        "building"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1",
+        "node-sass": "^7.0.3"
+    }
+}

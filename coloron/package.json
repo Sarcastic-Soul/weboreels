@@ -1,0 +1,21 @@
+{
+    "name": "coloron",
+    "version": "1.0.0",
+    "description": "A color-matching ball and bar game",
+    "main": "script.js",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Static site - no build required'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "color",
+        "ball"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

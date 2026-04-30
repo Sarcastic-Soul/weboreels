@@ -1,0 +1,21 @@
+{
+    "name": "packabunchas",
+    "version": "1.0.0",
+    "description": "A packing/matching puzzle game",
+    "main": "game.js",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Static site - no build required'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "puzzle",
+        "packing"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "marble-labyrinth",
+    "version": "1.0.0",
+    "description": "A tilt-controlled marble maze game",
+    "main": "script.js",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Static site - no build required'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "marble",
+        "maze",
+        "tilt"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

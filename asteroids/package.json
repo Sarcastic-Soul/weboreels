@@ -1,0 +1,21 @@
+{
+    "name": "asteroids",
+    "version": "1.0.0",
+    "description": "Classic asteroids game built with vanilla JavaScript",
+    "main": "script.js",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Static site - no build required'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "asteroids",
+        "canvas"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}

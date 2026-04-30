@@ -1,0 +1,9 @@
+{
+  "name": "space-huggers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A run and gun roguelike platformer with destructible environments",
+  "scripts": {
+    "start": "npx serve"
+  }
+}

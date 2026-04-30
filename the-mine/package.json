@@ -1,0 +1,22 @@
+{
+    "name": "the-mine",
+    "version": "1.0.0",
+    "description": "An underground mining game",
+    "main": "index.html",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "npm run compile-sass",
+        "compile-sass": "node-sass style.scss > style.css",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "mining"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1",
+        "node-sass": "^7.0.3"
+    }
+}

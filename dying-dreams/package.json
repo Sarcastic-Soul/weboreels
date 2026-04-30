@@ -1,0 +1,20 @@
+{
+    "name": "dying-dreams",
+    "version": "1.0.0",
+    "description": "A TypeScript-based game",
+    "main": "index.html",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "tsc src/main.ts --module es2020 --lib es2020,dom --target es2020 --outDir js",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1",
+        "typescript": "^5.0.0"
+    }
+}

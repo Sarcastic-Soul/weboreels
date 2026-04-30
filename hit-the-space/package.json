@@ -1,0 +1,20 @@
+{
+    "name": "hit-the-space",
+    "version": "1.0.0",
+    "description": "JS13k 2021 Entry",
+    "main": "index.html",
+    "scripts": {
+        "dev": "npx http-server . -p 3000",
+        "build": "echo 'Build from build-script'",
+        "start": "npm run dev"
+    },
+    "keywords": [
+        "game",
+        "js13k"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    }
+}
