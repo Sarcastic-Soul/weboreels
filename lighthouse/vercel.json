@@ -1,10 +1,4 @@
 {
     "installCommand": "echo \"Skipping install step\"",
-    "buildCommand": "echo \"Skipping build step\"",
-    "builds": [
-        {
-            "src": "index.html",
-            "use": "@vercel/static"
-        }
-    ]
+    "buildCommand": "echo \"Skipping build step\""
 }
