@@ -1,4 +1,5 @@
 {
     "installCommand": "echo \"Skipping install step\"",
-    "buildCommand": "echo \"Skipping build step\""
+    "buildCommand": "echo \"Skipping build step\"",
+    "outputDirectory": "."
 }
