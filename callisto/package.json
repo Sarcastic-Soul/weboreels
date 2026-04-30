@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "js13k",
   "license": "MIT",
+  "engines": {
+    "node": "20.x"
+  },
   "main": "src/index.js",
   "scripts": {
     "dev": "node build.js --dev",
