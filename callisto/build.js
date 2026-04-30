@@ -64,6 +64,23 @@ function compile() {
             js_output_file: "dist/index.js",
         });
 
+        // Use native binary instead of Java to fix Vercel missing Java 21 issues
+        try {
+            let platform = process.platform === 'darwin' ? 'macos' :
+                           process.platform === 'win32' ? 'windows' :
+                           process.platform === 'linux' ? 'linux' : null;
+            if (platform === 'linux' && process.arch === 'arm64') {
+                platform += '-arm64';
+            }
+            if (platform) {
+                const path = require.resolve(`google-closure-compiler-${platform}/compiler${platform === 'windows' ? '.exe' : ''}`);
+                closureCompiler.JAR_PATH = null;
+                closureCompiler.javaPath = path;
+            }
+        } catch (e) {
+            // fallback to Java
+        }
+
         closureCompiler.run((exitCode, stdOut, stdErr) => {
             if (stdOut) {
                 console.log(stdOut.trim());
