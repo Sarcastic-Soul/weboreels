@@ -1,0 +1,11 @@
+{
+  "name": "square-dash",
+  "version": "1.0.0",
+  "description": "A square dash platform",
+  "scripts": {
+    "start": "npx http-server -p 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
