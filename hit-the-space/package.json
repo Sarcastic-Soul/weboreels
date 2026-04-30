@@ -6,8 +6,6 @@
     "scripts": {
         "dev": "npx http-server . -p 3000",
         "build": "echo 'Build from build-script'",
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d release",
         "start": "npm run dev"
     },
     "keywords": [
@@ -17,7 +15,6 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "http-server": "^14.1.1",
-        "gh-pages": "^4.0.0"
+        "http-server": "^14.1.1"
     }
 }
