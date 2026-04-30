@@ -19,6 +19,9 @@
     "url": "https://github.com/Quinten/black-hole-square/issues"
   },
   "homepage": "https://github.com/Quinten/black-hole-square#readme",
+  "engines": {
+    "node": "20.x"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^14.0.0",
     "html-webpack-plugin": "^5.6.7",
