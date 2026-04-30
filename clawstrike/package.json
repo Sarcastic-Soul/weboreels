@@ -6,6 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
+    "build": "npm run build:prod",
     "songwriter": "tsx ai/songwriting.ts",
     "build:debug": "tsx build-game.ts --debug --html=build/debug.html",
     "build:debug:mangled": "tsx build-game.ts --debug --mangle --html=build/debug_mangled.html",
