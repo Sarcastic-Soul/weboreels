@@ -1,16 +1,39 @@
-<meta name="viewport" content="width=device-width,user-scalable=no">
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="container">
-    <div id="game"></div>
-    <div id="score">0</div>
-    <div id="instructions">Click (or press the spacebar) to place the block</div>
-    <div class="game-over">
-        <h2>Game Over</h2>
-        <p>You did great, you're the best.</p>
-        <p>Click or spacebar to start again</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <title>Tower Block</title>
+
+    <!-- 1. Link your compiled CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Your original game DOM -->
+    <div id="container">
+        <div id="game"></div>
+        <div id="score">0</div>
+        <div id="instructions">Click (or press the spacebar) to place the block</div>
+        <div class="game-over">
+            <h2>Game Over</h2>
+            <p>You did great, you're the best.</p>
+            <p>Click or spacebar to start again</p>
+        </div>
+        <div class="game-ready">
+            <div id="start-button">Start</div>
+            <div></div>
+        </div>
     </div>
-    <div class="game-ready">
-        <div id="start-button">Start</div>
-        <div></div>
-    </div>
-</div>
+
+    <!-- 2. Link external libraries required by your script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+
+    <!-- 3. Link your compiled JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
