@@ -5,9 +5,6 @@
     "main": "index.html",
     "scripts": {
         "dev": "npx http-server . -p 3000",
-        "build": "npm run compile-sass",
-        "compile-sass": "sass style.scss style.css",
-        "watch-sass": "sass --watch style.scss:style.css",
         "start": "npm run dev"
     },
     "keywords": [
@@ -16,8 +13,5 @@
     ],
     "author": "",
     "license": "ISC",
-    "devDependencies": {
-        "http-server": "^14.1.1",
-        "sass": "^1.70.0"
-    }
+    "devDependencies": {}
 }

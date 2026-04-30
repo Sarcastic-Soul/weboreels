@@ -1,6 +1,5 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": ".",
-    "framework": "static",
-    "public": true
+    "builds": [
+        { "src": "index.html", "use": "@vercel/static" }
+    ]
 }
