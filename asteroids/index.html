@@ -1,12 +1,31 @@
-<div id='container'>
-    <canvas id='c'></canvas>
-    <ul id='hud'>
-        <li class='score'>SCORE: <span id='score'>0</span></li>
-        <li>WEPON: <span id='wepon'>NORMAL BEAM</span></li>
-    </ul>
-    <div id='menu'>
-        <h2 id='title'></h2>
-        <div id='message'></div>
-        <a href='#' id='start'>START</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroids</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id='container'>
+        <canvas id='c'></canvas>
+        <ul id='hud'>
+            <li class='score'>SCORE: <span id='score'>0</span></li>
+            <li>WEPON: <span id='wepon'>NORMAL BEAM</span></li>
+        </ul>
+        <div id='menu'>
+            <h2 id='title'></h2>
+            <div id='message'></div>
+            <a href='#' id='start'>START</a>
+        </div>
     </div>
-</div>
+    <script src="script.js"></script>
+    <script>
+        // Init the game after everything loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
