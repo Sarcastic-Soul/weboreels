@@ -1,6 +1,6 @@
 {
     "buildCommand": "npm run build",
-    "outputDirectory": ".",
-    "framework": "static",
+    "outputDirectory": "dist",
+    "framework": "vite",
     "public": true
 }
