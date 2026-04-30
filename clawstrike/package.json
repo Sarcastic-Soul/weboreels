@@ -2,6 +2,9 @@
   "name": "@remvst/meowssassin",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "songwriter": "tsx ai/songwriting.ts",
     "build:debug": "tsx build-game.ts --debug --html=build/debug.html",
