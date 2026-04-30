@@ -4,7 +4,7 @@
     "description": "JS13k 2021 Entry",
     "main": "index.html",
     "engines": {
-        "node": "18.x"
+        "node": "20.x"
     },
     "scripts": {
         "dev": "npx http-server . -p 3000",
