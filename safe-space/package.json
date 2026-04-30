@@ -16,6 +16,7 @@
   },
   "scripts": {
     "prod": "npm run create-dist && npm run minify-glsl && npm run build && node scripts/wrap.js && npm run terser && node scripts/replace.js && npm run html && npm run zip",
+    "vercel-build": "npm run prod",
     "dev": "npm run create-dist && cp ./src/shaders/* ./dist/shaders && npm run build && cp ./dist/game-concatenated.js ./dist/safe-space.min.js && node scripts/replace.js && npm run html",
     "build": "node scripts/buildShaders && npm run concat",
     "coverage": "npm run create-dist && cp ./src/shaders/* ./dist/shaders && npm run build && npm run instrument && cp ./dist/nyc/dist/game-concatenated.js ./dist/safe-space.min.js && node scripts/replace.js && npm run html",
