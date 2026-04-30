@@ -7,6 +7,7 @@
         "dev": "npx http-server . -p 3000",
         "build": "npm run compile-sass",
         "compile-sass": "node-sass style.scss > style.css",
+        "watch-sass": "node-sass --watch style.scss style.css",
         "start": "npm run dev"
     },
     "keywords": [
