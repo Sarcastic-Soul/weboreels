@@ -1,7 +1,7 @@
 import { EVALUATE, NOMANGLE, assembleHtml, hardcodeConstants, macro, mangle } from "@remvst/js13k-tools";
 import CleanCSS from 'clean-css';
 import { promises as fs } from 'fs';
-import { minify as minifyHTML } from 'html-minifier';
+import { minify as minifyHTML } from 'html-minifier-terser';
 import { Packer } from 'roadroller';
 import * as terser from 'terser';
 import yargs from 'yargs/yargs';
@@ -370,7 +370,7 @@ const minifyLevel = (levelJson: any[]): string => {
     }
 
     if (argv.minify) {
-        html = minifyHTML(html, {
+        html = await minifyHTML(html, {
             collapseWhitespace: true,
             minifyCSS: false,
             minifyJS: false
